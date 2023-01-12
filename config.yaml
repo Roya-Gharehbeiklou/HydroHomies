@@ -19,13 +19,6 @@ stop_signal_test_red : '/commons/dsls/hydrohomies/Data/red/stop_signal_test_red.
 flanker_test_red : '/commons/dsls/hydrohomies/Data/red/flanker_test_red.xlsx'
 digit_span_test_red : '/commons/dsls/hydrohomies/Data/red/digit_span_test_red.xlsx'
 
-personal_data_purple : '/commons/dsls/hydrohomies/Data/purple/personal_data_purple.xlsx'
-verbal_fluency_test_purple : '/commons/dsls/hydrohomies/Data/purple/verbal_fluency_test_purple.xlsx'
-stroop_test_purple : '/commons/dsls/hydrohomies/Data/purple/stroop_test_purple.xlsx'
-stop_signal_test_purple : '/commons/dsls/hydrohomies/Data/purple/stop_signal_test_purple.xlsx'
-flanker_test_purple : '/commons/dsls/hydrohomies/Data/purple/flanker_test_purple.xlsx'
-digit_span_test_purple : '/commons/dsls/hydrohomies/Data/purple/digit_span_test_purple.xlsx'
-
 personal_data_pink : '/commons/dsls/hydrohomies/Data/pink/personal_data_pink.xlsx'
 verbal_fluency_test_pink : '/commons/dsls/hydrohomies/Data/pink/verbal_fluency_test_pink.xlsx'
 stroop_test_pink : '/commons/dsls/hydrohomies/Data/pink/stroop_test_pink.xlsx'
