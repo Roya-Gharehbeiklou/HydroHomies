@@ -1,0 +1,139 @@
+import pandas as pd
+from bokeh.plotting import figure
+from bokeh.transform import factor_cmap
+from bokeh.models import ColumnDataSource, FactorRange, Whisker
+
+
+def barplot(df, datacol):
+    """
+    This function plots a barplot based on a dataframe from within the 
+    data_dict
+
+    Args:
+        df (DataFrame): a dataframe
+
+    Returns:
+        p: a barplot
+
+    By:
+        Mahdiye
+        Jacob Menzinga
+    """
+
+    # create a list of different session types
+    types = list(df['type'].unique())
+
+    dff = df.groupby(['participant', 'type']).mean().reset_index()
+
+    # create a list of participants
+    participants = list(dff['participant'].unique())
+
+    #create two list of reaction time regarding session types
+    control_mean = list(dff[datacol][dff['type'] =='control'])
+    dehydration_mean = list(dff[datacol][dff['type'] =='dehydration'])
+
+    #create a dictionary of 3 keys and values and then convert into a dataframe
+    data = {'participants': participants,
+            'control': control_mean,
+            'dehydration': dehydration_mean,
+            }
+    data = pd.DataFrame(data)
+
+    palette = ["skyblue", "salmon"] #colors
+
+    # create a list like:
+    # [ ("blue", "control"), ("Ablue", "dehydration"), ("red", "control"), ("red", "dehydration"), ... ]
+    x = [ (participant, test) for participant in participants for test in types ]
+    counts = sum(zip(data['control'], data['dehydration']), ()) # like an hstack
+
+    source = ColumnDataSource(data=dict(x=x, counts=counts))
+    # plot
+    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], width=900, height=500, 
+                title='Title', y_axis_label="Y", x_axis_label="X")
+
+    p.vbar(x='x', top='counts', width=1, source=source, line_color="white",
+           fill_color=factor_cmap('x', palette=palette, factors=types, start=1, end=2))
+
+    p.y_range.start = 0
+    p.x_range.range_padding = 0.1
+    p.xaxis.major_label_orientation = 1
+    p.xgrid.grid_line_color = None
+
+    return p
+
+
+def calculate_standard_error(df, datacol):
+    """
+    A function to calculate the standard error of one column within a dataframe
+
+    Args:
+        df: one of the dataframes returned in the data_dict
+        datacol: the column of wich you want the SE
+
+    Returns:
+        data: returns the standard error
+
+    By:
+        Mahdiye
+        Jacob Menzinga
+    """
+
+    df_mean = df.groupby(by=["participant", "type"]).agg(mean=(datacol, "mean"))
+    df_se = df.groupby(by=["participant", "type"]).agg(se=(datacol, "sem"))
+    upper = df_mean["mean"] + 1.96 * df_se["se"]
+    lower = df_mean["mean"] - 1.96 * df_se["se"]
+    data = pd.concat([upper.rename("upper"), lower.rename("lower")], axis=1)
+    return data
+
+
+def plot_standard_error(plot, data):
+    """
+    A function to add the SE as wiskers to an already existing plot
+    The data is derived form the 'calculate_standard_error' function.
+
+    Args:
+        plot: an alredy existing bokeh plot object
+        data: the standard error data
+
+    Returns:
+        p: the plot given as argument with added whiskers
+    """
+
+    x = list(data.index.values)
+    data_map = {
+        'x': x,
+        'upper': data["upper"].tolist(),
+        'lower': data["lower"].tolist()
+
+        }
+    source = ColumnDataSource(data=data_map)
+
+    w = Whisker(source=source, base="x", upper="upper", lower="lower",
+                line_color='purple', level="overlay")
+    w.upper_head.line_color = 'purple'
+    w.lower_head.line_color = 'purple'
+    w.upper_head.size = w.lower_head.size = 20
+    plot.add_layout(w)
+    return plot
+
+
+def plot_error_bar(df, datacol):
+    """
+    Plots a barplot with error whiskers 
+
+    Args:
+        df (DataFrame): a dataframe from the data_dict
+        datacol (string): the column name of the y-variable you want to plot
+
+    Returns:
+        _type_: _description_
+
+    By:
+        Mahdiye
+        Jacob Menzinga
+    """
+    data_se = calculate_standard_error(df, datacol)
+    p = barplot(df, datacol)
+    p = plot_standard_error(p, data_se)
+
+    return p
