@@ -48,7 +48,7 @@ def barplot(df, datacol):
 
     source = ColumnDataSource(data=dict(x=x, counts=counts))
     # plot
-    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], width=600, height=400, line_color='black',
+    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], width=600, height=400,
                 title='Title', y_axis_label="Y", x_axis_label="particpant, type")
 
     p.vbar(x='x', top='counts', width=1, source=source, line_color="black",
