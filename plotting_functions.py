@@ -48,10 +48,10 @@ def barplot(df, datacol):
 
     source = ColumnDataSource(data=dict(x=x, counts=counts))
     # plot
-    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], width=900, height=500, 
-                title='Title', y_axis_label="Y", x_axis_label="X")
+    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], width=600, height=400, line_color='black',
+                title='Title', y_axis_label="Y", x_axis_label="particpant, type")
 
-    p.vbar(x='x', top='counts', width=1, source=source, line_color="white",
+    p.vbar(x='x', top='counts', width=1, source=source, line_color="black",
            fill_color=factor_cmap('x', palette=palette, factors=types, start=1, end=2))
 
     p.y_range.start = 0
@@ -109,9 +109,9 @@ def plot_standard_error(plot, data):
     source = ColumnDataSource(data=data_map)
 
     w = Whisker(source=source, base="x", upper="upper", lower="lower",
-                line_color='purple', level="overlay")
-    w.upper_head.line_color = 'purple'
-    w.lower_head.line_color = 'purple'
+                line_color='black', level="overlay")
+    w.upper_head.line_color = 'black'
+    w.lower_head.line_color = 'black'
     w.upper_head.size = w.lower_head.size = 20
     plot.add_layout(w)
     return plot
