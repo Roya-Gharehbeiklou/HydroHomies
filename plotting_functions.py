@@ -4,7 +4,7 @@ from bokeh.transform import factor_cmap
 from bokeh.models import ColumnDataSource, FactorRange, Whisker
 
 
-def barplot(df, datacol):
+def barplot(df, datacol, title='Title', xlabel='X', ylabel='Y'):
     """
     This function plots a barplot based on a dataframe from within the 
     data_dict
@@ -22,37 +22,40 @@ def barplot(df, datacol):
 
     # create a list of different session types
     types = list(df['type'].unique())
-    
+
     dff = df.groupby(['participant', 'type']).mean().reset_index()
-    
+
     # create a list of participants
     participants = list(dff['participant'].unique())
 
-    #create two list of reaction time regarding session types
-    control_mean = list(dff[datacol][dff['type'] =='control'])
-    dehydration_mean = list(dff[datacol][dff['type'] =='dehydration'])
+    # create two list of reaction time regarding session types
+    control_mean = list(dff[datacol][dff['type'] == 'control'])
+    dehydration_mean = list(dff[datacol][dff['type'] == 'dehydration'])
 
-    #create a dictionary of 3 keys and values and then convert into a dataframe
+    # create a dictionary of 3 keys and values and then convert into a dataframe
     data = {'participants': participants,
             'control': control_mean,
             'dehydration': dehydration_mean,
             }
     data = pd.DataFrame(data)
 
-    palette = ["skyblue", "salmon"] #colors
+    palette = ["skyblue", "salmon"]  # colors
 
     # create a list like:
     # [ ("blue", "control"), ("Ablue", "dehydration"), ("red", "control"), ("red", "dehydration"), ... ]
-    x = [ (participant, test) for participant in participants for test in types ]
-    counts = sum(zip(data['control'], data['dehydration']), ()) # like an hstack
+    x = [(participant, test) for participant in participants for test in types]
+    counts = sum(zip(data['control'], data['dehydration']), ())  # like an hstack
 
     source = ColumnDataSource(data=dict(x=x, counts=counts))
+
     # plot
-    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], width=600, height=400,
-                title='Title', y_axis_label="Y", x_axis_label="particpant, type")
+    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], 
+               width=600, height=400, title=title,
+               y_axis_label=ylabel, x_axis_label=xlabel)
 
     p.vbar(x='x', top='counts', width=1, source=source, line_color="black",
-           fill_color=factor_cmap('x', palette=palette, factors=types, start=1, end=2))
+           fill_color=factor_cmap('x', palette=palette,
+                                  factors=types, start=1, end=2))
 
     p.y_range.start = 0
     p.x_range.range_padding = 0.1
@@ -116,16 +119,21 @@ def plot_standard_error(plot, data):
     return plot
 
 
-def plot_error_bar(df, datacol, participants):
+def plot_error_bar(df, datacol, participants, title, xlabel, ylabel):
     """
-    Plots a barplot with error whiskers 
+    Plots a barplot with error whiskers
 
     Args:
         df (DataFrame): a dataframe from the data_dict
         datacol (string): the column name of the y-variable you want to plot
+        participants (list): the participants wich you want to have included in
+                             the plot.
+        title (string): the title of the plot
+        xlabel (string): the label on the x-axis
+        ylabel (string): the label on the y-axis
 
     Returns:
-        _type_: _description_
+        bokeh object: a bokeh barplot with error whiskers
 
     By:
         Mahdiye
@@ -133,7 +141,7 @@ def plot_error_bar(df, datacol, participants):
     """
     df = df[df.participant.isin(participants)]
     data_se = calculate_standard_error(df, datacol)
-    p = barplot(df, datacol)
+    p = barplot(df, datacol, title, xlabel, ylabel)
     p = plot_standard_error(p, data_se)
 
     return p
