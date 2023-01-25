@@ -22,9 +22,9 @@ def barplot(df, datacol):
 
     # create a list of different session types
     types = list(df['type'].unique())
-
+    
     dff = df.groupby(['participant', 'type']).mean().reset_index()
-
+    
     # create a list of participants
     participants = list(dff['participant'].unique())
 
@@ -77,7 +77,6 @@ def calculate_standard_error(df, datacol):
         Mahdiye
         Jacob Menzinga
     """
-
     df_mean = df.groupby(by=["participant", "type"]).agg(mean=(datacol, "mean"))
     df_se = df.groupby(by=["participant", "type"]).agg(se=(datacol, "sem"))
     upper = df_mean["mean"] + 1.96 * df_se["se"]
@@ -117,7 +116,7 @@ def plot_standard_error(plot, data):
     return plot
 
 
-def plot_error_bar(df, datacol):
+def plot_error_bar(df, datacol, participants):
     """
     Plots a barplot with error whiskers 
 
@@ -132,6 +131,7 @@ def plot_error_bar(df, datacol):
         Mahdiye
         Jacob Menzinga
     """
+    df = df[df.participant.isin(participants)]
     data_se = calculate_standard_error(df, datacol)
     p = barplot(df, datacol)
     p = plot_standard_error(p, data_se)
