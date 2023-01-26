@@ -46,7 +46,7 @@ def barplot(df, datacol, title='Title', xlabel='X', ylabel='Y'):
     source = ColumnDataSource(data=dict(x=x, counts=counts))
 
     # plot
-    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()], 
+    p = figure(x_range=FactorRange(*x), y_range=[0, df[datacol].max()+3], 
                width=600, height=400, title=title,
                y_axis_label=ylabel, x_axis_label=xlabel)
 
