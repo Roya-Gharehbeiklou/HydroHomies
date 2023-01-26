@@ -1,8 +1,0 @@
-Python v3.10.8
-Pandas v1.5.2
-Numpy v1.24.1
-Scipy v1.10.0
-Bokeh v2.4.3
-Matplotlib v3.6.2
-Holoviews v1.15.3
-Panel v0.14.2
