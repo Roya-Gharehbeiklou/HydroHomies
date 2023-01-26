@@ -12,17 +12,12 @@ Libraries needed:
     - scipy.stats
     - matplotlib
     - bokeh
+* Modules needed: 
+    - plotting_functions
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
-
+* Any browser can be used for this panel
 
 ## Help
 
@@ -54,9 +49,10 @@ h.bahrdo@st.hanze.nl
 
 ## Version History
 
-* 0.1
+* 1.0
     * Initial Release
+* 1.1
+    * last version(statistical part is added)
 
 ## License
-
-must be modified
+Copyright [2023] [GNU]
