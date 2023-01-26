@@ -19,11 +19,6 @@ Libraries needed:
 
 * Any browser can be used for this panel
 
-## Help
-
-Any advise for common problems or issues.
-
-
 ## Authors
 
 Contributors names and contact info
