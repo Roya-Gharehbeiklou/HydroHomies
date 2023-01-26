@@ -12,7 +12,7 @@ Libraries needed:
     - scipy.stats
     - matplotlib
     - bokeh
-Modules needed: 
+* Modules needed: 
     - plotting_functions
 
 ### Installing
