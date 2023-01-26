@@ -19,21 +19,21 @@ def flanker_info():
     text = '''
     In the flanker test the participant responds to a series of 50 stimuli by pressing ‘A’ on the keyboard, if the stimuli ‘X’ or ‘C’ are shown, or 'L’ if the stimuli ‘B’ and ‘V’ are shown.   
     Around this letter two flanking letters are shown on both sides, which might confuse the participant.  
-    These flanking letters are X, C, B or V and thus sometimes match the stimuli and sometimes dont.  
+    These flanking letters are X, C, B or V and thus sometimes match the stimuli and sometimes it does not match.  
     '''
     return text
     
 def flanker_rt():
     text = '''
     In the flanker test it is expected that a participants reaction time increases when the participant is dehydrated.  
-    As illustrated in the figur above, the orange and red participant show an increase in reaction time when dehydrated.  
+    As illustrated in the figure above, the orange and red participant show an increase in reaction time when dehydrated.  
     However, for the blue, green, and pink participant the hypothesis is not true.  
     '''
     return text
     
 def flanker_corr():
     text = '''
-    In the flanker test it is expected that a participant answer accarydecreases  when the participant is dehydrated, compared to the control.  
+    In the flanker test it is expected that a participant answer accuracy decreses when the participant is dehydrated, compared to the control.  
     For all the participants no significant change in the number of errors is detected, so the hypothesis is rejected, dehydration does not seem to affect the accuracy.  
     '''
     return text
@@ -68,7 +68,7 @@ def verbal_info():
     text = '''
     In the verbal fluency test the participant has 60 seconds to name as many English words starting with a letter, provided by the examiner.  
     This was done for a total of 3 times, where 2 letters are consonants and 1 letter is a vowel.  
-    The amount of words is recorded 
+    The amount of words is recorded.
     '''
     return text 
 
@@ -93,7 +93,7 @@ def digit_info():
 
 def digit_length():
     text = '''
-    In the digit span test The memorized sequence length is expected to decrease if the participant is dehydrated.  
+    In the digit span test the memorized sequence length is expected to decrease if the participant is dehydrated.  
     As visualised in the barplot, all participants performed better or equal in the control sessions than in the dehydration sessions.  
     '''
     return text
@@ -107,10 +107,11 @@ def stop_info():
     The participant has to stop his probably intialised response.  
     
     The test consists out of two phases:  
-    - Training phase:  
-    Consitst out of 50 stimili, the participant should respond to a left or right green pointing arrow by pressing the right key.  
-    When a left arrow is shown, the ‘B’ key should be pressed and when a right arrow is shown, the ‘N’ key should be pressed. \n
-    - Second phase:  
+    Training phase:  
+    Consists out of 50 stimili, the participant should respond to a left or right green pointing arrow by pressing the right key. 
+    When a left arrow is shown, the ‘B’ key should be pressed and when a right arrow is shown, the ‘N’ key should be pressed.
+    
+    Second phase:  
     Consists out of 40 stimuli,a red circle may appear around the arrow after the arrow is already shown.  
     If this red circle appears, the participant should not respond. 
     The time when this red circle is shown after the arrow appears, is 50, 100 or 450 ms.  
@@ -120,7 +121,7 @@ def stop_info():
 def stop_rt():
     text = '''
     In the stop signal test it was expected that the reaction time increases when the participant is dehydrated.  
-    As can be seen in the barplot only one participant was negatively influenced by dehydration.  
+    As can be seen in the barplot only one participant was negatively influenced by dehydration, which was the red participant.  
     '''
     return text
 
