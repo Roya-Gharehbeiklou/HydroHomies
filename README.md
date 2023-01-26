@@ -7,17 +7,21 @@ Because there are contradictory conclusions about the relationship between hydra
 
 * Any version of Python must be installed, preferably python3 or above
 Libraries needed:
-    - pandas
-    - yaml
-    - scipy.stats
-    - matplotlib
-    - bokeh
+    - Pandas(v1.5.2)
+    - Scipy(v1.10.0)
+    - Matplotlib(v3.6.2)
+    - Bokeh(v2.4.3)
+    - Numpy(v1.24.1)
+    - Holoviews(v1.15.3)) 
 * Modules needed: 
     - plotting_functions
 
 ### Installing
 
 * Any browser can be used for this panel
+
+### Help
+* yaml file is used to see the dashboard
 
 ## Authors
 
